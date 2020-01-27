@@ -52,6 +52,8 @@ $content = $response->getContent();
 
 Perfeito! Com isto já conseguimos fazer bastante coisas mas vamos avançando aos poucos.
 
+> Código: [exercicio1-ola_mundo.php](exercicio1-ola_mundo.php)
+
 Mas, e se precisarmos clicar em links, preencher formulários, voltar a navegação para a página anterior, tratar redirecionamentos do site (isto pode se tornar um caos sem a ferramenta correta para coleta de dados), esquecer que o site tem cookies de sessão. Este é todo o trabalho que um browser já faz por nós. Podemos simplificar a nossa vida?
 
 ## Simulando comportamento de browser
@@ -83,6 +85,8 @@ $html = $crawler->html();
 
 Top! Já conseguimos navegar entre as páginas sem precisarmos nos preocupar se foi feito algum tipo de redirecionamento, com cookies ou qualquer coisa do gênero, este pacote simplifica muito o nosso trabalho.
 
+> Código: [exercicio2-clicar_link.php](exercicio2-clicar_link.php)
+
 Mas, e se eu realmente precisar me autenticar em um site? Como faço para enviar dados via formulário?
 
 ### Preenchendo um formulário
@@ -110,7 +114,15 @@ $html = $crawler->html();
 $raw = $browser->getResponse()->getContent();
 ```
 
-### Tratando dados retornados
+> Código: [exercicio2-formulario.php](exercicio2-formulario.php)
+
+### Navegando por páginas
+
+É possível avançar e voltar na navegação.
+
+> Código: [exercicio3-navegacao.php](exercicio3-navegacao.php)
+
+## Tratando dados retornados
 
 Ações feitas em `$browser` como por exemplo `submitForm`, `request`, `clickLink` que retornem um html, podem ser manipuladas de forma bem prática. Estes métodos retornam um [crawler](https://symfony.com/doc/current/components/dom_crawler.html) em cima do html retornado.
 
@@ -146,6 +158,8 @@ $crawler = $browser->request('GET', 'https://vitormattos.github.io/poc-lineageos
 $text = $crawler->filterXPath('//title')->text();
 ```
 
+> Código: [exercicio4-multiplos_itens.php](exercicio4-multiplos_itens.php)
+
 ## Seletor CSS
 
 Caso você prefira trabalhar com seletor CSS do que com seletores XPath, você irá precisar instalar o `symfony/css-selector`:
@@ -159,6 +173,8 @@ E no lugar de usar o método `filterXPath`, utilize o método `filter` passando 
 ```php
 $text = $crawler->filter('title')->text();
 ```
+
+> Código: [exercicio4-multiplos_itens.php](exercicio4-multiplos_itens.php)
 
 ### Retornando múltiplos dados
 
@@ -176,7 +192,9 @@ $p = $crawler->filter('article p')->each(function($node) {
 });
 ```
 
-## Baixando imagens
+> Código: [exercicio4-multiplos_itens.php](exercicio4-multiplos_itens.php)
+
+# Baixando imagens
 
 Aplique o seletor CSS para encontrar todos os nodes de imagens da home do site e em seguida chame o método images:
 
@@ -198,3 +216,78 @@ foreach ($images as $image) {
     file_put_contents('images/' . $name, $uri);
 }
 ```
+
+Similar ao método link também temos alguns outros métodos que nos facilitam: `image`, `link`
+
+> Código: [exercicio5-baixando_imagens.php](exercicio5-baixando_imagens.php)
+
+# Coletando atributos de cada item visível na home
+
+Agora vamos baixar todos os dados de cada aparelho visível na home do site. Como não é o objetivo trabalharmos com banco de dados nestes exercícios, vamos salvar a saída destes dados em um arquivo [`json`](https://www.php.net/manual/en/book.json.php).
+
+```php
+$crawler = $browser->request('GET', 'https://vitormattos.github.io/poc-lineageos-cellphone-list-statics/about');
+function getItensInAListPage($crawler)
+{
+    $return = [];
+    $crawler->filter('article')->each(function($article) use (&$return) {
+        $url = $article->filter('.title')->link()->getUri();
+        $codename = basename($url);
+
+        // pega todos os elementos th
+        $attributes = $article->filter('th')->each(function($attr) {
+            return strtolower($attr->text());
+        });
+        // pega todos os elementos td
+        $values = $article->filter('td')->each(function($attr) {
+            return strtolower($attr->text());
+        });
+
+        $return[$codename] = array_combine($attributes, $values);
+
+        $return[$codename]['url'] = $url;
+    });
+    return $return;
+}
+$itensInPage = getItensInAListPage($crawler);
+```
+
+> Código: [exercicio6-atributo_de_cada_item_visivel.php](exercicio6-atributo_de_cada_item_visivel.php)
+
+# Paginação
+
+Temos um elemento na página inicial de paginação, vamos realizar algumas ações em cima dele.
+
+## Total de itens por página
+
+Observando que cada página segue o padrão `/<numero>` e que cada página tem 10 itens, a forma mais simples para coletar a url de todas as páginas é pegar o total de páginas é pegar o total de elementos e dividir pela quantidade de itens por página.
+
+```php
+$totalPages = $crawler->filter('header')->text();
+$totalPages = preg_replace('/\D/', '', $totalPages);
+$totalPages = ceil($totalPages);
+```
+
+> Código: [exercicio7-total_itens_por_pagina.php](exercicio7-total_itens_por_pagina.php)
+
+# Percorrendo todas as páginas da listagem
+
+
+Vamos utilizar nossa função criada anteriormente e a variável total de páginas
+
+```php
+$itens = [];
+$itens += getItensInAListPage($crawler);
+for($i = 2; $i < $totalPages; $i++) {
+    $crawler = $browser->request('GET', 'https://vitormattos.github.io/poc-lineageos-cellphone-list-statics/'.$i);
+    $itens+= getItensInAListPage($crawler);
+}
+```
+
+> Código: [exercicio8-percorre_todas_as_paginas.php](exercicio8-percorre_todas_as_paginas.php)
+
+# Baixando o conteúdo das páginas dos produtos
+
+Pra baixar o conteúdo das páginas dos produtos precisaremos fazer algo similar ao que já fizemos anteriormente.
+
+> Código [exercicio9-baixar_tudo.php](exercicio9-baixar_tudo.php)
