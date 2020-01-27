@@ -23,4 +23,4 @@ $html = $crawler->html();
 $raw = $browser->getResponse()->getContent();
 ```
 
-> Código: [exercicio2-formulario.php](exercicio2-formulario.php)
+> Código: [exercicio2-formulario.php](../exercicio2-formulario.php)

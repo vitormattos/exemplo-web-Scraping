@@ -34,4 +34,4 @@ $crawler = $browser->request('GET', 'https://vitormattos.github.io/poc-lineageos
 $text = $crawler->filterXPath('//title')->text();
 ```
 
-> Código: [exercicio4-multiplos_itens.php](exercicio4-multiplos_itens.php)
+> Código: [exercicio4-multiplos_itens.php](../exercicio4-multiplos_itens.php)

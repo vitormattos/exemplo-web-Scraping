@@ -12,4 +12,4 @@ E no lugar de usar o método `filterXPath`, utilize o método `filter` passando 
 $text = $crawler->filter('title')->text();
 ```
 
-> Código: [exercicio4-multiplos_itens.php](exercicio4-multiplos_itens.php)
+> Código: [exercicio4-multiplos_itens.php](../exercicio4-multiplos_itens.php)
