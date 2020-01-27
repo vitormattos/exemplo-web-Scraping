@@ -75,7 +75,10 @@ require 'vendor/autoload.php';
 
 $browser = new HttpBrowser(HttpClient::create());
 $browser->request('GET', 'https://vitormattos.github.io/poc-lineageos-cellphone-list-statics/');
-$browser->clickLink('Private');
+$browser->clickLink('Login');
+
+// Pega todo o HTML da página
+$html = $crawler->html();
 ```
 
 Top! Já conseguimos navegar entre as páginas sem precisarmos nos preocupar se foi feito algum tipo de redirecionamento, com cookies ou qualquer coisa do gênero, este pacote simplifica muito o nosso trabalho.
@@ -91,7 +94,7 @@ composer require symfony/mime
 
 Fazer envio de dados por formulário é bem simples.:
 ```php
-$crawler = $browser->submitForm('Login', ['username' => 'usuario', 'password' => 'muito-secreta'], 'GET');
+$crawler = $browser->submitForm('Go', ['username' => 'usuario', 'password' => 'muito-secreta'], 'GET');
 ```
 
 Só isto mesmo? Sim!
@@ -104,9 +107,94 @@ Para ter acesso aos dados coletados, pegue o retorno da função `submitForm`.
 // Pega todo o HTML de uma página comum
 $html = $crawler->html();
 // Coletar dados retornados como JSON por alguma API.
-$raw = $browser->getInternalResponse()->getContent();
+$raw = $browser->getResponse()->getContent();
 ```
 
 ### Tratando dados retornados
 
-em breve... 😃
+Ações feitas em `$browser` como por exemplo `submitForm`, `request`, `clickLink` que retornem um html, podem ser manipuladas de forma bem prática. Estes métodos retornam um [crawler](https://symfony.com/doc/current/components/dom_crawler.html) em cima do html retornado.
+
+Digamos que desejamos coletar a tag `title`
+
+## Seletor xpath
+
+O site está com jQuery, abriremos o console do browser e executaremos o seguinte código na página about:
+
+```js
+$x('//title')
+```
+Isto irá trazer um array com todas as tags title encontradas, mas só há uma.
+
+Como faço isto na minha aplicação?
+```php
+<?php
+
+use Symfony\Component\BrowserKit\HttpBrowser;
+use Symfony\Component\HttpClient\HttpClient;
+
+require 'vendor/autoload.php';
+
+$browser = new HttpBrowser(HttpClient::create());
+$crawler = $browser->request('GET', 'https://vitormattos.github.io/poc-lineageos-cellphone-list-statics');
+```
+
+> **PS**: método request retornado por `HttpClient`  é o response raw da requisição e o método `request` de `HttpBrowser` retorna um objeto `Crawler`.
+
+É com `$crawler` que iremos trabalhar agora.
+
+```php
+$text = $crawler->filterXPath('//title')->text();
+```
+
+## Seletor CSS
+
+Caso você prefira trabalhar com seletor CSS do que com seletores XPath, você irá precisar instalar o `symfony/css-selector`:
+
+```bash
+ composer require symfony/css-selector
+```
+
+E no lugar de usar o método `filterXPath`, utilize o método `filter` passando um seletor CSS.
+
+```php
+$text = $crawler->filter('title')->text();
+```
+
+### Retornando múltiplos dados
+
+Se o nosso seletor XPath retorna múltiplos nodes, como faremos para pegar o texto de todos?
+
+As funções `filterXPath` e `filter` retornam um objeto que pode ser percorrido como um array, podemos utilizar um foreach normal do PHP ou utilizar um método que já faz a iteração neste array.
+
+Vamos para a página `/about` e vamos coletar todas as tags P desta página utilizando seletor CSS:
+
+```php
+$crawler = $browser->request('GET', 'https://vitormattos.github.io/poc-lineageos-cellphone-list-statics/about');
+
+$p = $crawler->filter('article p')->each(function($node) {
+    return $node->text();
+});
+```
+
+## Baixando imagens
+
+Aplique o seletor CSS para encontrar todos os nodes de imagens da home do site e em seguida chame o método images:
+
+```php
+$images = $crawler->filter('article .img-thumbnail')->images();
+```
+
+O método `images` irá nos auxiliar a resolver o src das imagens. Caso estejam com endereços relativos, ele já irá colocar o path absoluto e para cada imagem poderemos chamar o método `getUri()` para pegar a url completa da imagem e baixá-la.
+
+Incrementando o código acima, vamos fazer um `each` para iterar nos nodes retornados, de cada node vamos pegar o atributo src e baixar a imagem:
+
+```php
+// Retorna um objeto Image de todos os nodes encontrados
+$images = $crawler->filter('article .img-thumbnail')->images();
+mkdir('images');
+foreach ($images as $image) {
+    $uri = $image->getUri();
+    $name = basename($uri);
+    file_put_contents('images/' . $name, $uri);
+}
+```
