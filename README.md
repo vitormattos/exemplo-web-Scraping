@@ -109,3 +109,4 @@ $raw = $browser->getInternalResponse()->getContent();
 
 ### Tratando dados retornados
 
+em breve... 😃
