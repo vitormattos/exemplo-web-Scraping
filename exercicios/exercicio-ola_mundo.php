@@ -2,7 +2,7 @@
 
 use Symfony\Component\HttpClient\HttpClient;
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 $client = HttpClient::create();
 $response = $client->request('GET', 'https://vitormattos.github.io/poc-lineageos-cellphone-list-statics/about/');
