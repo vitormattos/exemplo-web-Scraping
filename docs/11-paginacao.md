@@ -12,4 +12,4 @@ $totalPages = preg_replace('/\D/', '', $totalPages);
 $totalPages = ceil($totalPages);
 ```
 
-> Código: [exercicio7-total_itens_por_pagina.php](../exercicio7-total_itens_por_pagina.php)
+> Código: [exercicio7-total_itens_por_pagina.php](/exercicio7-total_itens_por_pagina.php)

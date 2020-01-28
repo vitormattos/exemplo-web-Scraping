@@ -1,4 +1,4 @@
-## Fazendo as primeiras requisições
+# Fazendo as primeiras requisições
 
 Para fazermos as primeiras requisições, utilizaremos o pacote [symfony/http-client](https://symfony.com/doc/current/components/http_client.html) por ele implementar [PSR-18](https://www.php-fig.org/psr/psr-18/) que nos traz, além de um padrão para se trabalhar com HTTP e melhor tratamento de erros, também facilita a implementação de testes na aplicação usando `MockHttpClient` e `MockResponse` para fazer mock de requisições e respostas.
 
@@ -38,6 +38,6 @@ $content = $response->getContent();
 
 Perfeito! Com isto já conseguimos fazer bastante coisas mas vamos avançando aos poucos.
 
-> Código: [exercicio1-ola_mundo.php](../exercicio1-ola_mundo.php)
+> Código: [exercicio1-ola_mundo.php](/exercicio1-ola_mundo.php)
 
 Mas, e se precisarmos clicar em links, preencher formulários, voltar a navegação para a página anterior, tratar redirecionamentos do site (isto pode se tornar um caos sem a ferramenta correta para coleta de dados), esquecer que o site tem cookies de sessão. Este é todo o trabalho que um browser já faz por nós. Podemos simplificar a nossa vida?

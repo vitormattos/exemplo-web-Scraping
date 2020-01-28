@@ -1,4 +1,4 @@
-### Preenchendo um formulário
+# Preenchendo um formulário
 Para fazer envio de dados via formulários, precisaremos de mais um pacote que irá funcionar em conjunto com o Browser-kit para realizar o envio dos dados. Então vamos instalar:
 
 ```bash
@@ -23,4 +23,4 @@ $html = $crawler->html();
 $raw = $browser->getResponse()->getContent();
 ```
 
-> Código: [exercicio2-formulario.php](../exercicio2-formulario.php)
+> Código: [exercicio2-formulario.php](/exercicio2-formulario.php)

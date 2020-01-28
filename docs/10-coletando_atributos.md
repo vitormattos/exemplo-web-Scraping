@@ -29,4 +29,4 @@ function getItensInAListPage($crawler)
 $itensInPage = getItensInAListPage($crawler);
 ```
 
-> Código: [exercicio6-atributo_de_cada_item_visivel.php](../exercicio6-atributo_de_cada_item_visivel.php)
+> Código: [exercicio6-atributo_de_cada_item_visivel.php](/exercicio6-atributo_de_cada_item_visivel.php)

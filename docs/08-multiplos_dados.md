@@ -1,4 +1,4 @@
-### Retornando múltiplos dados
+# Retornando múltiplos dados
 
 Se o nosso seletor XPath retorna múltiplos nodes, como faremos para pegar o texto de todos?
 
@@ -14,4 +14,4 @@ $p = $crawler->filter('article p')->each(function($node) {
 });
 ```
 
-> Código: [exercicio4-multiplos_itens.php](../exercicio4-multiplos_itens.php)
+> Código: [exercicio4-multiplos_itens.php](/exercicio4-multiplos_itens.php)

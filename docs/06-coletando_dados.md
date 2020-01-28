@@ -1,10 +1,10 @@
-## Tratando dados retornados
+# Tratando dados retornados
 
 Ações feitas em `$browser` como por exemplo `submitForm`, `request`, `clickLink` que retornem um html, podem ser manipuladas de forma bem prática. Estes métodos retornam um [crawler](https://symfony.com/doc/current/components/dom_crawler.html) em cima do html retornado.
 
 Digamos que desejamos coletar a tag `title`
 
-## Seletor xpath
+# Seletor xpath
 
 O site está com jQuery, abriremos o console do browser e executaremos o seguinte código na página about:
 
@@ -34,4 +34,4 @@ $crawler = $browser->request('GET', 'https://vitormattos.github.io/poc-lineageos
 $text = $crawler->filterXPath('//title')->text();
 ```
 
-> Código: [exercicio4-multiplos_itens.php](../exercicio4-multiplos_itens.php)
+> Código: [exercicio4-multiplos_itens.php](/exercicio4-multiplos_itens.php)

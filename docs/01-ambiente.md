@@ -1,4 +1,4 @@
-## Preparando ambiente com PHP
+# Preparando ambiente com PHP
 
 Este projeto utiliza versão latest do PHP com [xdebug](https://xdebug.org/) utilizando [Docker](https://docs.docker.com/engine/reference/builder/) e [docker-compose](https://docs.docker.com/compose/).
 
