@@ -15,3 +15,5 @@ Exercícios introdutórios para coleta de dados com PHP
 11. [Paginação](docs/11-paginacao.md)
 12. [Percorrendo todas as páginas da listagem](docs/12-percorrendo_paginas.md)
 13. [Baixando tudo](docs/13-baixando_tudo.md)
+
+> **OBS**: Neste respositório tem todos os exemplos funcionando. Caso queira fazer algo mais mao na massa, recomendo que você crie seu próprio repositório e siga as instruções de cada exercício a parte, do contráro, as instruções de instaçaão de pacotes serão dispensáveis.
