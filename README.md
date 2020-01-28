@@ -1,5 +1,7 @@
 # PHP web scraping
 
+Exercícios introdutórios para coleta de dados com PHP
+
 1. [Preparando ambiente com PHP](docs/01-ambiente.md)
 2. [Fazendo as primeiras requisições](docs/02-primeiras_requisicoes.md)
 3. [Simulando comportamento de browser](docs/03-simulando_browser.md)
