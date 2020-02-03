@@ -23,4 +23,4 @@ $html = $crawler->html();
 $raw = $browser->getResponse()->getContent();
 ```
 
-> Código: [Preencher formulário](/exercicio/04-formulario.php)
+> Código: [Preencher formulário](/exercicios/04-formulario.php)

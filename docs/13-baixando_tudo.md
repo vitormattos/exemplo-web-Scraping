@@ -2,4 +2,4 @@
 
 Pra baixar o conteúdo das páginas dos produtos precisaremos fazer algo similar ao que já fizemos anteriormente.
 
-> Código [Baixar tudo](/exercicio/13-baixar_tudo.php)
+> Código [Baixar tudo](/exercicios/13-baixar_tudo.php)

@@ -23,4 +23,4 @@ foreach ($images as $image) {
 
 Similar ao método link também temos alguns outros métodos que nos facilitam: `image`, `link`
 
-> Código: [Baixar arquivos](/exercicio/09-baixando_imagens.php)
+> Código: [Baixar arquivos](/exercicios/09-baixando_imagens.php)

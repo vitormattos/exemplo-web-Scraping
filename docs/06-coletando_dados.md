@@ -34,4 +34,4 @@ $crawler = $browser->request('GET', 'https://vitormattos.github.io/poc-lineageos
 $text = $crawler->filterXPath('//title')->text();
 ```
 
-> Código: [Seletor xpath](/exercicio/06-seletor-xpath.php)
+> Código: [Seletor xpath](/exercicios/06-seletor-xpath.php)

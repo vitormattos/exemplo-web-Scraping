@@ -27,6 +27,6 @@ $html = $crawler->html();
 
 Top! Já conseguimos navegar entre as páginas sem precisarmos nos preocupar se foi feito algum tipo de redirecionamento, com cookies ou qualquer coisa do gênero, este pacote simplifica muito o nosso trabalho.
 
-> Código: [Clicar em link](/exercicio/03-clicar_link.php)
+> Código: [Clicar em link](/exercicios/03-clicar_link.php)
 
 Mas, e se eu realmente precisar me autenticar em um site? Como faço para enviar dados via formulário?

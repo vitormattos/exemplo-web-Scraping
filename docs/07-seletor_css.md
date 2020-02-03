@@ -12,4 +12,4 @@ E no lugar de usar o método `filterXPath`, utilize o método `filter` passando 
 $text = $crawler->filter('title')->text();
 ```
 
-> Código: [Seletor CSS](/exercicio/07-seletor-css.php)
+> Código: [Seletor CSS](/exercicios/07-seletor-css.php)
