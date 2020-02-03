@@ -11,7 +11,7 @@ Exercícios introdutórios para coleta de dados com PHP
 7. [Seletor CSS](docs/07-seletor_css.md)
 8. [Retornando múltiplos dados](docs/08-multiplos_dados.md)
 9. [Baixando imagens](docs/09-baixando_imagens.md)
-10. [Coletando atributos de cada item visível na home]()
+10. [Coletando atributos de cada item visível na home](docs/10-coletando_atributos.md)
 11. [Paginação](docs/11-paginacao.md)
 12. [Percorrendo todas as páginas da listagem](docs/12-percorrendo_paginas.md)
 13. [Baixando tudo](docs/13-baixando_tudo.md)
