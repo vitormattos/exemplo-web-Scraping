@@ -2,4 +2,4 @@
 
 É possível avançar e voltar na navegação.
 
-> Código: [navegacao.php](/navegacao.php)
+> Código: [Navegar por páginas](/exercicio/05-navegacao.php)

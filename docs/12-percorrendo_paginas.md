@@ -11,4 +11,4 @@ for($i = 2; $i < $totalPages; $i++) {
 }
 ```
 
-> Código: [percorre_todas_as_paginas.php](/percorre_todas_as_paginas.php)
+> Código: [Percorrendo várias páginas](/exercicio/12-percorre_todas_as_paginas.php)

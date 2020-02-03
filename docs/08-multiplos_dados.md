@@ -14,4 +14,4 @@ $p = $crawler->filter('article p')->each(function($node) {
 });
 ```
 
-> Código: [multiplos_itens.php](/multiplos_itens.php)
+> Código: [Selecionando múltiplos itens](/exercicio/08-multiplos_itens.php)
